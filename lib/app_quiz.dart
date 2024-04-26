@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 
 import 'package:hp_quiz/app_home_screen.dart';
 import 'package:hp_quiz/app_question.dart';
+import 'package:hp_quiz/app_results_screen.dart';
 import 'package:hp_quiz/data/question.dart';
 
 class Quiz extends StatefulWidget{
@@ -31,11 +32,12 @@ class _Quiz extends State<Quiz>{
     if(selectedAnswer.length == question.length){
       setState(() {
         selectedAnswer = [];
-        activeScreen = HomeScreen(switchScreen);
+        activeScreen = const ResultsScreen();
       });
       
     }
   }
+
 @override
   Widget build(context){
     return MaterialApp( 
