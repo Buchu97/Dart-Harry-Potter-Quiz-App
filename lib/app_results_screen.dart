@@ -1,10 +1,28 @@
 
 
 import 'package:flutter/material.dart';
+import 'package:hp_quiz/data/question.dart';
 
 class ResultsScreen extends StatelessWidget{
-const ResultsScreen({super.key});
- 
+const ResultsScreen({super.key, required this.collectAnswers});
+
+final List<String> collectAnswers;
+
+List<Map<String,Object>> getSummaryData(){
+  List<Map<String,Object>> summaryData= [];
+  for(var loopVariable = 0; loopVariable<= collectAnswers.length; loopVariable++ ){
+    summaryData.add(
+      {
+        'questionIndex' : loopVariable,
+        'question' : question[loopVariable].questiontext,
+        'correctAnswer': question[loopVariable].answersList[0],
+        'choosenAnswer': collectAnswers[loopVariable],
+      }
+    );
+  }
+  return summaryData;
+}
+
   @override
   Widget build(context) {
    return SizedBox(
