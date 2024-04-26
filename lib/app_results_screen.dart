@@ -1,6 +1,7 @@
 
 
 import 'package:flutter/material.dart';
+import 'package:hp_quiz/app_summar_section.dart';
 import 'package:hp_quiz/data/question.dart';
 
 class ResultsScreen extends StatelessWidget{
@@ -10,7 +11,7 @@ final List<String> collectAnswers;
 
 List<Map<String,Object>> getSummaryData(){
   List<Map<String,Object>> summaryData= [];
-  for(var loopVariable = 0; loopVariable<= collectAnswers.length; loopVariable++ ){
+  for(var loopVariable = 0; loopVariable<collectAnswers.length; loopVariable++ ){
     summaryData.add(
       {
         'questionIndex' : loopVariable,
@@ -35,6 +36,7 @@ List<Map<String,Object>> getSummaryData(){
           children: [
             const Text("You have answered x out of y question "),
             const SizedBox(height: 30),
+             SummarySection(getSummaryData()),
             const Text("List of Question, correct amswer, choosen answer"),
             const SizedBox(height: 30),
             TextButton(onPressed: () {}, child: const Text("Restart")),
