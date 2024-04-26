@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 
 import 'package:hp_quiz/app_home_screen.dart';
 import 'package:hp_quiz/app_question.dart';
+import 'package:hp_quiz/data/question.dart';
 
 class Quiz extends StatefulWidget{
   const Quiz({super.key});
@@ -14,6 +15,7 @@ State<Quiz> createState(){
 
 class _Quiz extends State<Quiz>{
   Widget?  activeScreen ;
+  List<String> selectedAnswer = [];
   @override
   void initState() {
     activeScreen = HomeScreen(switchScreen);
@@ -21,8 +23,18 @@ class _Quiz extends State<Quiz>{
   }
    void switchScreen(){
     setState(() {
-      activeScreen = const QuestionsScreen();
+      activeScreen = QuestionsScreen(onAnswerSelect: collectAnswers);
     });
+  }
+  void collectAnswers(String answer){
+    selectedAnswer.add(answer);
+    if(selectedAnswer.length == question.length){
+      setState(() {
+        selectedAnswer = [];
+        activeScreen = HomeScreen(switchScreen);
+      });
+      
+    }
   }
 @override
   Widget build(context){

@@ -3,7 +3,9 @@ import 'package:hp_quiz/app_answer_button.dart';
 import 'package:hp_quiz/data/question.dart';
 
 class QuestionsScreen extends StatefulWidget {
-  const QuestionsScreen({super.key});
+  QuestionsScreen({super.key, required this.onAnswerSelect});
+ 
+ void Function(String answer) onAnswerSelect;
   @override
   State<QuestionsScreen> createState() {
     return _QuestionsSreen();
@@ -13,8 +15,9 @@ class QuestionsScreen extends StatefulWidget {
 
 class _QuestionsSreen extends State<QuestionsScreen> {
  var currentQuestionIndex = 0;
- void answeQuestion (){
+ void answeQuestion (String selectedAnswer){
   setState(() {
+     widget.onAnswerSelect(selectedAnswer);  
      currentQuestionIndex++;
   });
  
@@ -38,7 +41,9 @@ class _QuestionsSreen extends State<QuestionsScreen> {
             Text(currentQuestion.questiontext),
             const SizedBox(height: 30),
             ...currentQuestion.getShufflAnserList().map((answer) {
-              return AnswerButton(answerText: answer, onAnswerSelect: answeQuestion);
+              return AnswerButton(answerText: answer, onAnswerSelect: (){
+                answeQuestion(answer);
+              });
             }),
           ],
         ),
