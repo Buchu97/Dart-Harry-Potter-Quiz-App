@@ -31,11 +31,16 @@ class _Quiz extends State<Quiz>{
     selectedAnswer.add(answer);
     if(selectedAnswer.length == question.length){
       setState(() {
-        activeScreen =   ResultsScreen( collectAnswers: selectedAnswer );
+        activeScreen =   ResultsScreen( collectAnswers: selectedAnswer, restartQuiz: restartQuiz, );
         selectedAnswer = [];
       });
       
     }
+  }
+  void restartQuiz(){
+    setState(() {
+      activeScreen = HomeScreen(switchScreen);
+    });
   }
 
 @override
